@@ -2,8 +2,8 @@ import praw
 import re
 from datetime import datetime
 import time
-import algorithm
-import constants
+import Algorithm as algorithm
+import Constants as constants
 
 reddit = praw.Reddit('MemeAdviser')
 
