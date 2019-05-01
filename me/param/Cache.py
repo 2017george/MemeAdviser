@@ -10,18 +10,21 @@ class FileCache:
     def __init__(self) -> None:
         self.file_caches = []
 
-    def refresh(self, file) -> object:
+    def refresh(self, file: str) -> object:
         with open(file, mode="r") as filehandler:
             if not type(filehandler) is TextIOWrapper:
                 raise OSError("File handler not instance of TextIOWrapper! Quitting...")
             else:
-                lines = filehandler.readlines()
-                for i, x in enumerate(lines):
-                    lines[i] = lines[i].replace("\n", "")
-                return lines
+                return list(filter(None, filehandler.read().split("\n")))
 
     def get(self) -> object:
         return self.file_caches
+
+    def get_by_int(self, num: int) -> object:
+        try:
+            return self.file_caches[num]
+        except Exception as e:
+            return e
 
     def add(self, i: object) -> bool:
         try:
@@ -30,3 +33,16 @@ class FileCache:
             return False
         finally:
             return True
+
+    def clear_file(file: str) -> None:
+        try:
+            open(file, mode="w")
+            return None
+        except Exception as e:
+            return None
+
+    def write_to_file(self, file: str, content: object) -> None:
+        self.clear_file(file)
+        with open(file, mode="w") as filehandler:
+            filehandler.write(content)
+        return None
