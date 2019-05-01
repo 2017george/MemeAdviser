@@ -13,9 +13,11 @@ if __name__ not "__main__":
 
 reddit = praw.Reddit('MemeAdviser')
 
+replied_file = Cache.AbstractFile("../replied.txt")
+subscribed_file = Cache.AbstractFile("../subscribed.txt")
 fileLoadCache = Cache.FileCache()
-replied = fileLoadCache.refresh("../replied.txt")
-subscribed = fileLoadCache.refresh("../subscribed.txt")
+replied = fileLoadCache.refresh(replied_file.get_name())
+subscribed = fileLoadCache.refresh(subscribed_file.get_name())
 fileLoadCache.add(replied)
 fileLoadCache.add(subscribed)
 
@@ -40,9 +42,8 @@ if submission.id not in replied:
     try:
         # Update replied.txt
         replied.append(submission.id)
-        with open("../replied.txt", "w") as f:
-            for post_id in replied:
-                f.write(post_id + "\n")
+        for post_id in replied:
+            replied.write_to_file(post_id + "\n")
 
         # Post to r/InsiderMemeTrading
         if submission.score < constants.Thresholds.submission:
@@ -70,9 +71,8 @@ for message in reddit.inbox.unread():
     if re.search("unsubscribe", message.body, re.IGNORECASE) or re.search("unsubscribe", message.subject, re.IGNORECASE):
         if message.author.name in subscribed:
             subscribed.remove(message.author.name)
-            with open("../subscribed.txt", "w") as f:
-                for user in subscribed:
-                    f.write(user + "\n")
+            for user in subscribed:
+                fileLoadCache.write_to_file(subscribed_file.get_name(), user + "\n")
             message.reply("You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'")
         else:
             message.reply("You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
@@ -81,9 +81,8 @@ for message in reddit.inbox.unread():
     elif re.search("subscribe", message.body, re.IGNORECASE) or re.search("subscribe", message.subject, re.IGNORECASE):
         if message.author.name not in subscribed:
             subscribed.append(message.author.name)
-            with open("../subscribed.txt", "w") as f:
-                for user in subscribed:
-                    f.write(user + "\n")
+            for user in subscribed:
+                fileLoadCache.write_to_file(subscribed_file.get_name(), user + "\n")
             message.reply("You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'")
         else:
             message.reply("You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
