@@ -2,7 +2,6 @@ import praw
 import re
 from datetime import datetime
 import time
-import sys
 import Algorithm as algorithm
 import Constants as constants
 import Cache
