@@ -2,8 +2,13 @@ import praw
 import re
 from datetime import datetime
 import time
+import sys
 import Algorithm as algorithm
 import Constants as constants
+
+# check if this is being imported or not
+if __name__ not "__main__":
+    raise OSError("You need to run this file directly, not import it silly!")
 
 reddit = praw.Reddit('MemeAdviser')
 
