@@ -46,3 +46,10 @@ class FileCache:
         with open(file, mode="w") as filehandler:
             filehandler.write(content)
         return None
+
+class AbstractFile:
+    def __init__(self, name: str):
+        self.name = name
+
+    def get_name(self) -> str:
+        return self.name
