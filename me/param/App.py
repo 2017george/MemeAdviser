@@ -5,6 +5,7 @@ import time
 import sys
 import Algorithm as algorithm
 import Constants as constants
+import Cache
 
 # check if this is being imported or not
 if __name__ not "__main__":
@@ -12,11 +13,11 @@ if __name__ not "__main__":
 
 reddit = praw.Reddit('MemeAdviser')
 
-with open("../replied.txt", "r") as f:
-    replied = list(filter(None, f.read().split("\n")))
-
-with open("../subscribed.txt", "r") as f:
-    subscribed = list(filter(None, f.read().split("\n")))
+fileLoadCache = Cache.FileCache()
+replied = fileLoadCache.refresh("../replied.txt")
+subscribed = fileLoadCache.refresh("../subscribed.txt")
+fileLoadCache.add(replied)
+fileLoadCache.add(subscribed)
 
 subreddit = reddit.subreddit("MemeEconomy")
 post_subreddit = reddit.subreddit("InsiderMemeTrading")
