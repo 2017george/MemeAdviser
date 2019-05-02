@@ -34,7 +34,7 @@ class FileCache:
         finally:
             return True
 
-    def clear_file(file: str) -> None:
+    def clear_file(self, file: str) -> None:
         try:
             open(file, mode="w")
             return None
