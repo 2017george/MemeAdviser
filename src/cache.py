@@ -6,6 +6,8 @@
 
 # Taken from a project that may become open source soon, please keep the copyright header
 
+from io import TextIOWrapper
+
 class FileCache:
     def __init__(self) -> None:
         self.file_caches = []
