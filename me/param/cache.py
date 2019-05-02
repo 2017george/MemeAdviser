@@ -1,5 +1,5 @@
 # |==========================================|
-# | Copyright (c) 2019-present Reece Dunham  |
+# | Copyright (c) 2017-present Reece Dunham  |
 # | All rights reserved                      |
 # | Used with explicit permission            |
 # |==========================================|
