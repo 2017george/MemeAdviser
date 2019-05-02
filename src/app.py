@@ -56,7 +56,6 @@ if submission.id not in replied:
         # Comment on r/MemeEconomy post
         if submission.score < constants.Thresholds.comment:
             submission.reply(constants.Messages.comment.format(upvotes=str(submission.score), time=str(datetime.utcfromtimestamp(submission.created_utc).strftime('%B %d %H:%M:%S')), min=minutes, break_even=algorithm.break_even(submission.score)))
-
     except:
         pass
 
@@ -66,15 +65,19 @@ unread_messages = []
 for message in reddit.inbox.unread():
     unread_messages.append(message)
 
-    # Check for new unsubscriptions
+    # Check for new un-subscriptions
     if re.search("unsubscribe", message.body, re.IGNORECASE) or re.search("unsubscribe", message.subject, re.IGNORECASE):
         if message.author.name in subscribed:
             subscribed.remove(message.author.name)
             for user in subscribed:
                 fileLoadCache.write_to_file(subscribed_file.get_name(), user + "\n")
-            message.reply("You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'")
+            message.reply(
+                "You've unsubscribed from MemeAdviser. To subscribe, reply with 'Subscribe'"
+            )
         else:
-            message.reply("You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'")
+            message.reply(
+                "You aren't subscribed to MemeAdviser! If you want to subscribe, reply with 'Subscribe'"
+            )
 
     # Check for new subscriptions
     elif re.search("subscribe", message.body, re.IGNORECASE) or re.search("subscribe", message.subject, re.IGNORECASE):
@@ -82,9 +85,13 @@ for message in reddit.inbox.unread():
             subscribed.append(message.author.name)
             for user in subscribed:
                 fileLoadCache.write_to_file(subscribed_file.get_name(), user + "\n")
-            message.reply("You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'")
+            message.reply(
+                "You've subscribed to MemeAdviser! To unsubscribe, reply with 'Unsubscribe'"
+            )
         else:
-            message.reply("You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'")
+            message.reply(
+                "You're already subscribed to MemeAdviser! If you want to unsubscribe, reply with 'Unsubscribe'"
+            )
 
 # Mark all messages as read
 reddit.inbox.mark_read(unread_messages)
