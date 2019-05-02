@@ -12,7 +12,7 @@ if __name__ != "__main__":
 
 reddit = praw.Reddit('MemeAdviser')
 
-replied_file = Cache.AbstractFile("../replied.txt")
+replied_file = cache.AbstractFile("../replied.txt")
 subscribed_file = cache.AbstractFile("../subscribed.txt")
 fileLoadCache = Cache.FileCache()
 replied = fileLoadCache.refresh(replied_file.get_name())
