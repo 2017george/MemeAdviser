@@ -9,11 +9,11 @@
 from io import TextIOWrapper
 
 class FileCache:
-    def __init__(self) -> None:
+    def __init__(self):
         self.file_caches = []
 
-    def refresh(self, file: str) -> object:
-        with open(file, mode="r") as filehandler:
+    def refresh(self, file: AbstractFile) -> object:
+        with open(file.get_name, mode="r") as filehandler:
             if not type(filehandler) is TextIOWrapper:
                 raise OSError("File handler not instance of TextIOWrapper! Quitting...")
             else:
@@ -36,16 +36,16 @@ class FileCache:
         finally:
             return True
 
-    def clear_file(self, file: str) -> None:
+    def clear_file(self, file: AbstractFile) -> object:
         try:
-            open(file, mode="w")
+            open(file.get_name(), mode="w")
             return None
         except Exception as e:
-            return None
+            return e
 
-    def write_to_file(self, file: str, content: object) -> None:
+    def write_to_file(self, file: AbstractFile, content: object) -> None:
         self.clear_file(file)
-        with open(file, mode="w") as filehandler:
+        with open(file.get_name(), mode="w") as filehandler:
             filehandler.write(content)
         return None
 
