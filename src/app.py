@@ -14,7 +14,7 @@ reddit = praw.Reddit('MemeAdviser')
 
 replied_file = cache.AbstractFile("../replied.txt")
 subscribed_file = cache.AbstractFile("../subscribed.txt")
-fileLoadCache = Cache.FileCache()
+fileLoadCache = cache.FileCache()
 replied = fileLoadCache.refresh(replied_file.get_name())
 subscribed = fileLoadCache.refresh(subscribed_file.get_name())
 fileLoadCache.add(replied)
