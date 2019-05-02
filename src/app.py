@@ -7,7 +7,7 @@ import constants
 import cache
 
 # check if this is being imported or not
-if __name__ not "__main__":
+if __name__ != "__main__":
     raise OSError("You need to run this file directly, not import it silly!")
 
 reddit = praw.Reddit('MemeAdviser')
