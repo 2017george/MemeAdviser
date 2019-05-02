@@ -2,9 +2,9 @@ import praw
 import re
 from datetime import datetime
 import time
-import Algorithm as algorithm
-import Constants as constants
-import Cache
+import algorithm
+import constants
+import cache
 
 # check if this is being imported or not
 if __name__ not "__main__":
