@@ -33,7 +33,7 @@ Create a new issue before working on a PR to prevent wasted effort
     * Click **create app** and copy the ID and secret
 - Create a new file named `src/praw.ini`
 - Make a new configuration that looks like this
-```
+```ini
 [MemeAdviser]
 client_id=[YOUR APP'S ID]
 client_secret=[YOUR APP'S SECRET]
