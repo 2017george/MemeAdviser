@@ -35,8 +35,8 @@ Create a new issue before working on a PR to prevent wasted effort
 - Make a new configuration that looks like this
 ```ini
 [MemeAdviser]
-client_id=[YOUR APP'S ID]
-client_secret=[YOUR APP'S SECRET]
+client_id=[YOUR APP ID]
+client_secret=[YOUR APP SECRET]
 username=[YOUR REDDIT USERNAME]
 password=[YOUR REDDIT PASSWORD]
 user_agent=MemeAdviser Dev 1.0
