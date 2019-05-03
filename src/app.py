@@ -12,8 +12,8 @@ def main(thresholds: constants.Thresholds):
     replied_file = cache.AbstractFile("../data/replied.txt")
     subscribed_file = cache.AbstractFile("../data/subscribed.txt")
     fileLoadCache = cache.FileCache()
-    replied = fileLoadCache.refresh(replied_file.get_name())
-    subscribed = fileLoadCache.refresh(subscribed_file.get_name())
+    replied = fileLoadCache.refresh(replied_file)
+    subscribed = fileLoadCache.refresh(subscribed_file)
     fileLoadCache.add(replied)
     fileLoadCache.add(subscribed)
 
